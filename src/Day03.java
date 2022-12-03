@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.Collection;
 
 public class Day03 {
 
@@ -44,7 +43,28 @@ public class Day03 {
     }
 
     public static int part02(File file) throws FileNotFoundException {
-        return 0;
+        Scanner reader = new Scanner(file);
+        int total = 0;
+        int counter = 0;
+        Set<Character>[] group = new HashSet[3];
+        while (reader.hasNextLine()) {
+            String line = reader.nextLine();
+            group[counter] = toSet(toCharObjectArray(line.toCharArray()));
+            System.out.println(Arrays.toString(group));
+            System.out.println(counter);
+            if (counter != 2) {
+                counter ++;
+            } else {
+                Set<Character> common = group[0];
+                common.retainAll(group[1]);
+                common.retainAll(group[2]);
+                System.out.println(common);
+                total += priorityCalculator(common.iterator().next());
+                group = new HashSet[3];
+                counter = 0;
+            }
+        }
+        return total;
     }
 
     public static void main(String[] args) throws FileNotFoundException {

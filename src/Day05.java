@@ -14,7 +14,7 @@ public class Day05 {
         for (int i = 0; i < stacks.length; i++) {
             stacks[i] = new Stack();
         }
-        int counter = 0;
+        // Convert "stacks" in file to 9x8 matrix
         for (int row = 0; row < 8; row ++) {
             String line = reader.nextLine();
             for (int col = 0; col <= line.length() / 4; col++) {
@@ -24,15 +24,14 @@ public class Day05 {
                 }
             }
         }
+        // Put matrix data into stacks
         for (int row = 7; row >= 0; row--) {
             char[] line = matrix[row];
             for (int col = 0; col <= 8; col++) {
-                stacks[col].push(matrix[row][col]);
-            }
-        }
-        for (Stack stack : stacks) {
-            while (!Character.isLetter((Character) stack.peek())) {
-                stack.pop();
+                // Ignore unknown characters/nulls
+                if (Character.isLetter(matrix[row][col])) {
+                    stacks[col].push(matrix[row][col]);
+                }
             }
         }
         return stacks;

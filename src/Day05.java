@@ -15,13 +15,8 @@ public class Day05 {
             stacks[i] = new Stack();
         }
         int counter = 0;
-        while (counter < 8) {
-            String line = reader.nextLine();
-            strings[counter] = line;
-            counter ++;
-        }
         for (int row = 0; row < 8; row ++) {
-            String line = strings[row];
+            String line = reader.nextLine();
             for (int col = 0; col <= line.length() / 4; col++) {
                 int lineIndex = col * 4 + 1;
                 if (line.charAt(lineIndex) != ' ' && line.charAt(lineIndex) != '[' && line.charAt(lineIndex) != ']') {
@@ -77,13 +72,10 @@ public class Day05 {
 
     public static String part02(Stack[] stacks, int[][] instructions) {
         String result = "";
-        System.out.println(Arrays.toString(stacks));
         for (int[] instr : instructions) {
             int counter = instr[0];
             Stack temp = new Stack();
             while (counter > 0) {
-                System.out.println(stacks[instr[1] -1]);
-                System.out.println(temp);
                 temp.push(stacks[instr[1] - 1].pop());
                 counter--;
             }

@@ -73,6 +73,12 @@ public class Day05 {
         String result = "";
         for (int[] instr : instructions) {
             int counter = instr[0];
+            /*
+            Temp stack means items move like this when pushed one at a time:
+            Stack0: ABC ->
+            temp:   CBA ->
+            Stack1: ABC
+             */
             Stack temp = new Stack();
             while (counter > 0) {
                 temp.push(stacks[instr[1] - 1].pop());

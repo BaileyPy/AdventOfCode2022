@@ -16,9 +16,7 @@ public class Day07 {
         while (reader.hasNextLine()) {
             String line = reader.nextLine();
             String[] splitLine = line.split(" ");
-            if (Objects.equals(splitLine[0], "$")) mode = 0;
-            else mode = 1;
-            if (mode == 0) {
+            if (Objects.equals(splitLine[0], "$")) {
                 if (Objects.equals(splitLine[1], "cd")) {
                     if (Objects.equals(splitLine[2], "..")) current = current.parent;
                     else {
@@ -103,6 +101,4 @@ class Directory extends Item{
     LinkedList<Item> children = new LinkedList<Item>();
 }
 
-class File_ extends Item{
-
-}
+class File_ extends Item{}

@@ -40,18 +40,18 @@ public class Day10 {
         String screen = "";
         Scanner reader = new Scanner(file);
         while (reader.hasNextLine()) {
-            cycle++;
-            if (cycle % 40 == 0) cycle = 0;
             if (cycle == spritePos || cycle == spritePos + 1 || cycle == spritePos - 1) screen += "#";
             else screen += ".";
+            cycle++;
+            if (cycle % 40 == 0) spritePos += 40;
             String line = reader.nextLine();
             String[] splitLine = line.split(" ");
             if (Objects.equals(splitLine[0], "addx")) {
-                cycle++;
-                spritePos += Integer.parseInt(splitLine[1]);
-                if (cycle % 40 == 0) cycle = 0;
                 if (cycle == spritePos || cycle == spritePos + 1 || cycle == spritePos - 1) screen += "#";
                 else screen += ".";
+                cycle++;
+                spritePos += Integer.parseInt(splitLine[1]);
+                if (cycle % 40 == 0) spritePos+= 40;
             }
         }
         return screen;
@@ -63,7 +63,6 @@ public class Day10 {
         System.out.println(part01);
         String part02 = part02(file);
         for (int i = 0; i < 202; i += 40) {
-            // Missing first column but still legible enough
             System.out.println(part02.substring(i, i + 39));
         }
     }

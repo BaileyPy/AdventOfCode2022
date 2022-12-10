@@ -43,7 +43,6 @@ public class Day09 {
         Scanner reader = new Scanner(file);
         Integer[][] rope = new Integer[10][2];
         for (int i = 0; i < rope.length; i++) rope[i] = new Integer[]{0, 0};
-        System.out.println(Arrays.deepToString(rope));
         HashSet<List<Integer>> positionHistory = new HashSet<>();
         while (reader.hasNextLine()) {
             String line = reader.nextLine();

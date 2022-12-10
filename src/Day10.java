@@ -40,15 +40,15 @@ public class Day10 {
         String screen = "";
         Scanner reader = new Scanner(file);
         while (reader.hasNextLine()) {
-            if (cycle == spritePos || cycle == spritePos + 1 || cycle == spritePos - 1) screen += "#";
-            else screen += ".";
+            if (cycle == spritePos || cycle == spritePos + 1 || cycle == spritePos - 1) screen += "■";
+            else screen += " ";
             cycle++;
             if (cycle % 40 == 0) spritePos += 40;
             String line = reader.nextLine();
             String[] splitLine = line.split(" ");
             if (Objects.equals(splitLine[0], "addx")) {
-                if (cycle == spritePos || cycle == spritePos + 1 || cycle == spritePos - 1) screen += "#";
-                else screen += ".";
+                if (cycle == spritePos || cycle == spritePos + 1 || cycle == spritePos - 1) screen += "■";
+                else screen += " ";
                 cycle++;
                 spritePos += Integer.parseInt(splitLine[1]);
                 if (cycle % 40 == 0) spritePos+= 40;

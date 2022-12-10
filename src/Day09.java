@@ -22,10 +22,10 @@ public class Day09 {
                     case "L" -> head[0]--;
                 }
                 System.out.println(Arrays.toString(head));
-                if (head[0] == tail[0]) {
+                if (Objects.equals(head[0], tail[0])) {
                     // Same column. Move 1 or 0 positions left or right closer to head
                     tail[1] += (head[1] - tail[1]) / 2;
-                } else if (head[1] == tail[1]) {
+                } else if (Objects.equals(head[1], tail[1])) {
                     tail[0] += (head[0] - tail[0]) / 2;
                 } else {
                     // Must move diagonally
@@ -36,6 +36,8 @@ public class Day09 {
                         tail[1] += yDiff >= 1 ? 1 : -1;
                     }
                 }
+                System.out.println(Arrays.toString(tail));
+                System.out.println();
                 positionHistory.add(List.of(tail));
             }
         }

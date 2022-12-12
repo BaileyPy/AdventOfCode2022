@@ -1,9 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Scanner;
+import java.util.*;
 
 public class Day12 {
 
@@ -21,7 +18,7 @@ public class Day12 {
         return map;
     }
 
-    public static int Dijkstra(char[][] map) {
+    public static int Dijkstra(char[][] map, int startX, int startY) {
         Node[][] nodeMap = new Node[map.length][map[0].length];
         Node goalNode = null;
         PriorityQueue<Node> Q = new PriorityQueue<>(new distComparator());
@@ -32,7 +29,9 @@ public class Day12 {
                 if (nodeMap[row][col].isGoal) goalNode = nodeMap[row][col];
             }
         }
-        nodeMap[0][0].dist = 0;
+        nodeMap[startY][startX].dist = 0;
+        Q.remove(nodeMap[startY][startX]);
+        Q.add(nodeMap[startY][startX]);
         while (!Q.isEmpty()) {
             Node u = Q.poll();
             if (u.dist == Integer.MAX_VALUE) break;
@@ -56,7 +55,23 @@ public class Day12 {
     }
 
     public static int part01(char[][] map) {
-        return Dijkstra(map);
+        return Dijkstra(map, 0, 0);
+    }
+
+    public static int part02(char[][] map) {
+        List<int[]> aPos = new LinkedList<>();
+        for (int row = 0; row < map.length; row++) {
+            for (int col = 0; col < map[row].length; col++) {
+                int[] pos = {col, row};
+                if (map[row][col] == 'a') aPos.add(pos);
+            }
+        }
+        int currentBest = Integer.MAX_VALUE;
+        for (int[] pos : aPos) {
+            int dist = Dijkstra(map.clone(), pos[0], pos[1]);
+            if (dist < currentBest) currentBest = dist;
+        }
+        return currentBest;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
@@ -64,6 +79,8 @@ public class Day12 {
         char[][] map = mapGenerator(file);
         int part01 = part01(map.clone());
         System.out.println(part01);
+        int part02 = part02(map.clone());
+        System.out.println(part02);
     }
 }
 
